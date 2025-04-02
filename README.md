@@ -40,3 +40,64 @@ Simply navigate to the chapter you are interested in and click the link to view 
 Feel free to fork this repository, add your own notes or resources (e.g., simulation files, problem sets, corrections), and submit a pull request. Please ensure any contributed material adheres to copyright regulations.
 
 ---
+
+---
+
+## Multistage Amplifier Design Example (TSMC 0.18µm)
+
+This section details a design example or assignment for a multi-stage operational amplifier, implemented using the TSMC 0.18µm CMOS process.
+
+### Schematic
+
+![Multistage Amplifier Schematic](./multistage-amplifier-schematic.png)
+*(Image: multistage-amplifier-schematic.png - Uploaded to the repository)*
+
+### Design Specifications
+
+The goal was to design an open-loop amplifier driving a **5 pF || 50 Ω load** with the following targets:
+
+| Specification              | Target                               | Achieved                |
+| :------------------------- | :----------------------------------- | :---------------------- |
+| Supply Voltage (VDD)     | 1.8 V                                | 1.8 V                   |
+| DC Power Consumption (Pdc) | ≤ 20 mW                              | **15.534 mW** |
+| Input Signal (Vin)       | 2 mVp @ 1kHz (DC offset 0.6V)        | Used for simulation     |
+| Open Loop Gain (Av)        | 35 dB - 38 dB                        | **35.079 dB** |
+| Open Loop Bandwidth (f3dB) | ≥ 200 kHz                            | **~78.94 MHz** (*)      |
+| Biasing                  | Must use current mirrors             | Implemented (M3/M4)     |
+
+(*) *Bandwidth measured at Av(DC) - 3dB = 35.079 - 3 ≈ 32 dB.*
+
+### Components & Configuration
+
+* **Technology:** TSMC 0.18µm (`.lib TSMC_models.txt`)
+* **Supply:** VDD (V1) = 1.8V
+* **Input Signal (V2):** SINE(0.6V DC, 2mV Amplitude, 1kHz Freq), AC = 1
+* **Input Bias (V3):** 0.6V DC
+* **Resistors:** R1=210Ω, R2=8kΩ, R3=14kΩ, R4=50Ω
+* **Load Capacitor:** C1=5pF
+
+**Transistor Sizing (L = 0.18µm for all):**
+
+| Transistor | Model    | Width (W) | Role                 |
+| :--------- | :------- | :-------- | :------------------- |
+| M1         | tsmc018n | 25µm      | Input Diff Pair    |
+| M2         | tsmc018n | 25µm      | Input Diff Pair    |
+| M3         | tsmc018n | 150µm     | Current Mirror Ref |
+| M4         | tsmc018n | 5µm       | Current Mirror Bias|
+| M5         | tsmc018p | 6µm       | Active Load/Cascode|
+| M6         | tsmc018p | 6µm       | Active Load/Cascode|
+| M7         | tsmc018n | 44µm      | Source Follower    |
+| M8         | tsmc018n | 180µm     | Output Stage       |
+
+### Simulation Setup Hints (SPICE)
+
+```spice
+.lib TSMC_models.txt
+.op                 ; DC Operating Point Analysis
+.tran 5m            ; Transient Analysis (example: 5ms duration)
+.dc V2 0 1.8 0.01   ; DC Sweep (example: sweep V2)
+.ac dec 100 1 1g    ; AC Analysis (Frequency Response: 100 points/decade, 1Hz to 1GHz)
+
+
+
+
