@@ -78,17 +78,6 @@ The goal was to design an open-loop amplifier driving a **5 pF || 50 Ω load** w
 
 **Transistor Sizing (L = 0.18µm for all):**
 
-| Transistor | Model    | Width (W) | Role                 |
-| :--------- | :------- | :-------- | :------------------- |
-| M1         | tsmc018n | 25µm      | Input Diff Pair    |
-| M2         | tsmc018n | 25µm      | Input Diff Pair    |
-| M3         | tsmc018n | 150µm     | Current Mirror Ref |
-| M4         | tsmc018n | 5µm       | Current Mirror Bias|
-| M5         | tsmc018p | 6µm       | Active Load/Cascode|
-| M6         | tsmc018p | 6µm       | Active Load/Cascode|
-| M7         | tsmc018n | 44µm      | Source Follower    |
-| M8         | tsmc018n | 180µm     | Output Stage       |
-
 ### Simulation Setup Hints (SPICE)
 
 ```spice
