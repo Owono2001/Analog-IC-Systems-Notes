@@ -17,7 +17,7 @@ This repository contains chapter notes covering key topics in AICS.
 2.  **Single-Stage Amplifiers**
     * [Chapter 2 Notes](./Chapter%202%20-%20Single-Stage%20Amplifiers.pdf)
 3.  **Differential Amplifiers**
-    * [Chapter 3 Notes](./Chapter-3-Differential-Amplifiers.pdf) 4.  **Current Mirrors**
+    * [Chapter 3 Notes](./Chapter-3-Differential Amplifiers.pdf) 4.  **Current Mirrors**
     * [Chapter 4 Notes](./Chapter%204%20-%20Current%20Mirrors.pdf)
 5.  **Frequency Response of Amplifiers**
     * [Chapter 5 Notes](./Chapter%205%20-%20Frequency%20Response%20of%20Amplifiers.pdf)
